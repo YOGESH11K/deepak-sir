@@ -1,0 +1,43 @@
+/* ---------------------------------------------------------------------------
+   Motion helpers + reduced-motion contract
+--------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Draw-in for technical SVG artwork */
+.draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.draw-group.is-visible .draw,
+.is-visible .draw {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1.4s var(--ease-out);
+}
+
+.is-visible .draw.draw--slow {
+  transition-delay: 0.35s;
+}
+
+/* Slow ambient drift */
+@keyframes drift-x {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(6px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}

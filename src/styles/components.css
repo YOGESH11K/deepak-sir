@@ -1,0 +1,273 @@
+/* ---------------------------------------------------------------------------
+   Reusable components
+--------------------------------------------------------------------------- */
+
+/* Reference animated link: border slides in, plus enters, text shifts */
+.link {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  font-weight: 500;
+  letter-spacing: var(--tracking);
+  text-transform: uppercase;
+  overflow: hidden;
+  user-select: none;
+  padding-bottom: 2px;
+  white-space: nowrap;
+}
+
+.link__text {
+  padding: 0;
+  transition: padding 0.2s var(--ease);
+}
+
+.link__line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--accent);
+  transform: translateX(-100%);
+  transition: transform 0.2s var(--ease);
+}
+
+.link__plus {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(-100%, -50%);
+  transition: transform 0.2s var(--ease);
+  font-size: 1em;
+}
+
+.link:hover .link__line,
+.link:focus-visible .link__line {
+  transform: translateX(0);
+}
+
+.link:hover .link__plus,
+.link:focus-visible .link__plus {
+  transform: translate(0, -50%);
+}
+
+.link:hover .link__text,
+.link:focus-visible .link__text {
+  padding-left: 0.8vw;
+}
+
+/* email variant — plus enters from the right */
+.link--email .link__plus {
+  left: auto;
+  right: 0;
+  transform: translate(100%, -50%);
+}
+
+.link--email:hover .link__plus,
+.link--email:focus-visible .link__plus {
+  transform: translate(0, -50%);
+}
+
+.link--email:hover .link__text,
+.link--email:focus-visible .link__text {
+  padding-left: 0;
+  padding-right: 1.2vw;
+}
+
+/* Button-style CTA */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+  padding: clamp(12px, 1.1vw, 18px) clamp(18px, 1.8vw, 30px);
+  transition: transform 0.25s var(--ease), background-color 0.25s var(--ease), color 0.25s var(--ease);
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+  background: var(--bg);
+  color: var(--accent);
+}
+
+.cta__arrow {
+  transition: transform 0.25s var(--ease);
+}
+
+.cta:hover .cta__arrow {
+  transform: translateX(4px);
+}
+
+/* Ghost button */
+.ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: clamp(11px, 1vw, 16px) clamp(16px, 1.6vw, 26px);
+  transition: border-color 0.25s var(--ease), color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+
+.ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ------------------------------ Custom cursor ---------------------------- */
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: clamp(18px, 1.1vw, 26px);
+  height: clamp(18px, 1.1vw, 26px);
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate3d(-50%, -50%, 0);
+  transition:
+    width 0.2s var(--ease),
+    height 0.2s var(--ease),
+    opacity 0.3s var(--ease),
+    background-color 0.2s var(--ease);
+  opacity: 0;
+  will-change: transform;
+}
+
+.cursor.is-visible {
+  opacity: 1;
+}
+
+.cursor.is-active {
+  width: clamp(30px, 1.7vw, 42px);
+  height: clamp(30px, 1.7vw, 42px);
+  background: color-mix(in srgb, var(--accent) 85%, transparent);
+  border-color: var(--accent);
+  animation: pulse-ring 0.6s var(--ease) infinite alternate;
+}
+
+.cursor__label {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 10px);
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 7px;
+  border-radius: 2px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s var(--ease);
+}
+
+.cursor.has-label .cursor__label {
+  opacity: 1;
+}
+
+/* ------------------------------ Back to top ------------------------------ */
+
+.back-to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 12px 16px;
+  transition: border-color 0.25s var(--ease), color 0.25s var(--ease);
+}
+
+.back-to-top:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.back-to-top__arrow {
+  transition: transform 0.25s var(--ease);
+}
+
+.back-to-top:hover .back-to-top__arrow {
+  transform: translateY(-3px);
+}
+
+/* ------------------------------- Loading screen -------------------------- */
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--gutter);
+}
+
+.loader__mark {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 64px);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.loader__meta {
+  font-size: var(--micro);
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.loader__bar {
+  height: 1px;
+  background: var(--accent);
+  transform-origin: left;
+}
+
+/* --------------------------- Wireframe canvas accents -------------------- */
+
+.wireframe {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  opacity: 0.85;
+}
+
+.wireframe canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}

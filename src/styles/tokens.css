@@ -1,0 +1,48 @@
+/* ---------------------------------------------------------------------------
+   Design tokens — Deepak Kumawat portfolio
+   Restrained dark palette + single engineering accent.
+--------------------------------------------------------------------------- */
+
+:root {
+  /* Color */
+  --bg: #0e0e0e;
+  --bg-raised: #141414;
+  --bg-inset: #0a0a0a;
+  --fg: #f4f4f2;
+  --fg-muted: #adada6;
+  --fg-dim: #80807a;
+  --line: rgba(244, 244, 242, 0.14);
+  --line-soft: rgba(244, 244, 242, 0.07);
+  --accent: #00ff59;
+  --accent-ink: #0e0e0e;
+
+  /* Type families */
+  --font-display: "Fraunces Variable", "Fraunces", Georgia, "Times New Roman", serif;
+  --font-mono: "Space Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  /* Type scale (viewport-relative like the reference, clamped for small screens) */
+  --micro: clamp(12px, 0.95vw, 15px);
+  --tracking: 0.08vw;
+  --fs-body: var(--micro);
+  --fs-h3: clamp(18px, 2.4vw, 46px);
+  --fs-h1: clamp(34px, 5.5vw, 124px);
+  --fs-h1-md: clamp(24px, 4vw, 84px);
+
+  /* Rhythm */
+  --gutter: clamp(16px, 3vw, 56px);
+  --container: 94vw;
+  --section-space: clamp(88px, 13vw, 240px);
+  --nav-h: clamp(56px, 7vw, 88px);
+
+  /* Motion */
+  --ease: cubic-bezier(0.075, 0.82, 0.165, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 0.5s;
+}
+
+@media (max-width: 800px) {
+  :root {
+    --micro: 11px;
+    --tracking: 0.6px;
+  }
+}
